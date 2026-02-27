@@ -1,0 +1,6 @@
+Changes of the Raku package "MermaidJS::Grammar".
+
+2026-02-27 0.0.1
+    - First version:
+        - A grammar that parsers flowchart- and class specs
+        - Translation to Raku actions
