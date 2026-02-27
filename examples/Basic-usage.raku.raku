@@ -12,3 +12,4 @@ flowchart TD
 EOF
 
 say to-json(mermaid-js-interpret($spec, actions => 'Raku'));
+#say mermaid-js-interpret($spec, actions => 'PlantUML');
