@@ -1,9 +1,9 @@
 use v6.d;
 
 class MermaidJS::Actions::Raku {
-    has %!nodes;
-    has @!node-order;
-    has @!edges;
+    has %.nodes;
+    has @.node-order;
+    has @.edges;
     has @!styles;
 
     method TOP($/) {
@@ -42,7 +42,7 @@ class MermaidJS::Actions::Raku {
         if $<edge> {
             @!edges.append($<edge>.made);
         } elsif $<node-def> {
-            self!add-node($<node-def>.made);
+            self.add-node($<node-def>.made);
         } elsif $<comment> {
             @!styles.push($<comment>.made);
         } elsif $<class-def> {
@@ -63,7 +63,7 @@ class MermaidJS::Actions::Raku {
 
     method subgraph($/) {
         my $title = $<subgraph-start><subgraph-title>
-            ?? self!strip-label($<subgraph-start><subgraph-title>.Str)
+            ?? self.strip-label($<subgraph-start><subgraph-title>.Str)
             !! '';
         my @lines;
         @lines.push($title.chars ?? "subgraph $title" !! 'subgraph');
@@ -85,13 +85,13 @@ class MermaidJS::Actions::Raku {
     method edge($/) {
         my @edges;
         my @current = ($<node>.made, );
-        self!add-node(@current.head);
+        self.add-node(@current.head);
 
         for $<linked-node> -> $ln {
             my %ln = $ln.made;
             my @targets = |%ln<nodes>;
             for @targets -> $node {
-                self!add-node($node);
+                self.add-node($node);
             }
             for @current -> $src {
                 for @targets -> $dst {
@@ -141,8 +141,8 @@ class MermaidJS::Actions::Raku {
         my $type = 'rect';
         if $<node-label> {
             my $raw = $<node-label>.Str;
-            $label = self!strip-label($raw);
-            $type = self!node-type($raw);
+            $label = self.strip-label($raw);
+            $type = self.node-type($raw);
         }
         make({
             :$id,
@@ -151,21 +151,21 @@ class MermaidJS::Actions::Raku {
         });
     }
 
-    method !add-node(%node) {
+    method add-node(%node) {
         my $id = %node<id>;
         return if %!nodes{$id}:exists;
         %!nodes{$id} = %node;
         @!node-order.push($id);
     }
 
-    method !strip-label(Str:D $raw --> Str) {
+    method strip-label(Str:D $raw --> Str) {
         my $text = $raw;
         $text .= subst(/^ <[ \[ \] \( \) \{ \} \< \> ]>+ /);
         $text .= subst(/ <[ \[ \] \( \) \{ \} \< \> ]>+ $/);
         $text;
     }
 
-    method !node-type(Str $raw --> Str) {
+    method node-type(Str $raw --> Str) {
         return 'circle' if $raw.starts-with('((');
         return 'double-circle' if $raw.starts-with('(((');
         return 'rhombus' if $raw.starts-with('{');

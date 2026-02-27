@@ -1,18 +1,10 @@
 use v6.d;
 
-class MermaidJS::Actions::PlantUML {
-    has %!nodes;
-    has @!node-order;
-    has @!edges;
+use MermaidJS::Actions::Raku;
+
+class MermaidJS::Actions::PlantUML
+        is MermaidJS::Actions::Raku {
     has @!body-lines;
-
-    method TOP($/) {
-        $/.make($<diagram>.made);
-    }
-
-    method diagram($/) {
-        $/.make($<flowchart>.made);
-    }
 
     method flowchart($/) {
         my $dir-line = self!direction-line($<direction>);
@@ -21,8 +13,8 @@ class MermaidJS::Actions::PlantUML {
         @lines.push('@startuml');
         @lines.push($dir-line) if $dir-line.defined;
 
-        for @!node-order -> $id {
-            my %node = %!nodes{$id};
+        for self.node-order -> $id {
+            my %node = self.nodes{$id};
             my $label = %node<label> // $id;
             next without $label;
             my $shape = %node<shape> // 'rectangle';
@@ -32,7 +24,7 @@ class MermaidJS::Actions::PlantUML {
 
         @lines.append(@!body-lines);
 
-        for @!edges -> %edge {
+        for self.edges -> %edge {
             my $line = %edge<from> ~ ' --> ' ~ %edge<to>;
             if %edge<label>:exists && %edge<label>.defined && %edge<label>.trim.chars {
                 $line ~= ' : ' ~ %edge<label>.trim;
@@ -44,36 +36,9 @@ class MermaidJS::Actions::PlantUML {
         $/.make(@lines.join("\n"));
     }
 
-    method statement-list($/) {
-        $/.make($<statement>».made);
-    }
-
-    method statement($/) {
-        if $<edge> {
-            @!edges.append($<edge>.made);
-        } elsif $<node-def> {
-            self!add-node($<node-def>.made);
-        } elsif $<comment> {
-            @!body-lines.push($<comment>.made);
-        } elsif $<class-def> {
-            @!body-lines.push($<class-def>.made);
-        } elsif $<class-assign> {
-            @!body-lines.push($<class-assign>.made);
-        } elsif $<style> {
-            @!body-lines.push($<style>.made);
-        } elsif $<link-style> {
-            @!body-lines.push($<link-style>.made);
-        } elsif $<click> {
-            @!body-lines.push($<click>.made);
-        } elsif $<subgraph> {
-            @!body-lines.append($<subgraph>.made);
-        }
-        $/.make(True);
-    }
-
     method subgraph($/) {
         my $title = $<subgraph-start><subgraph-title>
-            ?? self!strip-label($<subgraph-start><subgraph-title>.Str)
+            ?? self.strip-label($<subgraph-start><subgraph-title>.Str)
             !! '';
         my @lines;
         @lines.push($title.chars ?? "package \"$title\" \{" !! 'package {');
@@ -96,13 +61,13 @@ class MermaidJS::Actions::PlantUML {
     method edge($/) {
         my @edges;
         my @current = ($<node>.made, );
-        self!add-node(@current[0]);
+        self.add-node(@current[0]);
 
         for $<linked-node> -> $ln {
             my %ln = $ln.made;
             my @targets = |%ln<nodes>;
             for @targets -> $node {
-                self!add-node($node);
+                self.add-node($node);
             }
             for @current -> $src {
                 for @targets -> $dst {
@@ -117,69 +82,6 @@ class MermaidJS::Actions::PlantUML {
             @current = @targets;
         }
         $/.make(@edges);
-    }
-
-    method linked-node($/) {
-        $/.make({
-            link => $<link>.made,
-            nodes => $<node-list>.made,
-        });
-    }
-
-    method link($/) {
-        my $label;
-        if $<edge-label> {
-            if $<edge-label><label-text> {
-                $label = $<edge-label><label-text>.Str;
-            } elsif $<edge-label><edge-text> {
-                $label = $<edge-label><edge-text>.Str;
-            }
-        }
-        $/.make({ op => $<link-op>.Str, label => $label });
-    }
-
-    method node-list($/) {
-        $/.make($<node>».made);
-    }
-
-    method node-def($/) {
-        $/.make($<node>.made);
-    }
-
-    method node($/) {
-        my $id = $<node-id>.Str;
-        my $label = $id;
-        my $shape = 'rectangle';
-        if $<node-label> {
-            my $raw = $<node-label>.Str;
-            $label = self!strip-label($raw);
-            $shape = self!shape-for($raw);
-        }
-        $/.make({
-            :$id,
-            :$label,
-            :$shape,
-        });
-    }
-
-    method !add-node(%node) {
-        my $id = %node<id>;
-        return if %!nodes{$id}:exists;
-        %!nodes{$id} = %node;
-        @!node-order.push($id);
-    }
-
-    method !strip-label(Str $raw --> Str) {
-        my $text = $raw;
-        $text ~~ s/^ <[ \[ \] \( \) \{ \} \< \> ]>+ //;
-        $text ~~ s/ <[ \[ \] \( \) \{ \} \< \> ]>+ $//;
-        $text;
-    }
-
-    method !shape-for(Str $raw --> Str) {
-        return 'circle' if $raw.starts-with('((') || $raw.starts-with('(((');
-        return 'diamond' if $raw.starts-with('{');
-        return 'rectangle';
     }
 
     method !direction-line($direction) {
