@@ -1,7 +1,7 @@
 {
   "name": "MermaidJS::Grammar",
   "description": "Grammar for parsing Mermaid-JS language specs and converting them to specs of Graphviz DOT, PlantUML, or Wolfram Language.",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "perl": "6.d",
   "authors": [
     "Anton Antonov"
@@ -28,6 +28,6 @@
     "wolfram language",
     "wolfram"
   ],
-  "api": "1",
+  "api": "0",
   "source-url": "https://github.com/antononcube/Raku-MermaidJS-Grammar.git"
 }
