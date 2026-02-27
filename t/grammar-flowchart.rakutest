@@ -1,0 +1,79 @@
+use v6.d;
+use Test;
+
+use MermaidJS::Grammar;
+
+plan *;
+
+my @samples =
+    q:to/EOF/,
+flowchart TD
+  A[Start] --> B{Decide}
+  B -->|Yes| C[Do thing]
+  B -->|No| D[Stop]
+EOF
+    q:to/EOF/,
+flowchart LR
+  subgraph One
+    X((Alpha)) --> Y[Beta]
+  end
+  Y --> Z{{Gamma}}
+EOF
+    q:to/EOF/,
+flowchart TB
+  %% This is a comment
+  A --> B & C
+  classDef nice fill:#f96,stroke:#333,stroke-width:2px
+  class A,B nice
+EOF
+    q:to/EOF/,
+flowchart TD
+  click A "https://example.com" "Link"
+  linkStyle 1 stroke:#f66,stroke-width:2px
+EOF
+    q:to/EOF/,
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#fff'}}}%%
+flowchart RL
+  Start([S]) ==o End([E])
+EOF
+    q:to/EOF/,
+graph TD
+  A --> B
+EOF
+;
+
+my $src1 = q:to/EOF/;
+flowchart TD
+EOF
+
+my $src2 = q:to/EOF/;
+flowchart TD
+  A[start] --> B[Decide]
+EOF
+
+my $src3 = q:to/EOF/;
+flowchart TD
+  A[start] --> |No|B[Decide]
+EOF
+
+my $src4 = q:to/EOF/;
+flowchart TD
+  A[Start] --> B{Decide}
+  B -->|Yes| C[Do thing]
+  B -->|No| D[Stop]
+EOF
+
+#say $src2;
+
+#say '-' x 20;
+
+#say mermaid-js-subparse($src4);
+#say mermaid-js-parse($src4);
+
+for @samples.kv -> $i, $src {
+    #say MermaidJS::Grammar.subparse($src);
+    ok MermaidJS::Grammar.parse($src).defined, "sample {$i + 1} parses";
+}
+
+
+done-testing;
