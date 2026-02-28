@@ -3,7 +3,7 @@ use Test;
 
 use MermaidJS::Grammar;
 
-plan 2;
+plan *;
 
 my $src = q:to/EOF/;
 mindmap
@@ -16,7 +16,7 @@ mindmap
 EOF
 
 my %res = mermaid-js-interpret($src, :actions('raku'));
-note %res;
+
 is-deeply
         %res,
         {  type => 'mindmap',
@@ -36,3 +36,5 @@ is-deeply
 
 is %res<root><Raku><Parsing><Regexes>:exists, True, 'nested keys are accessible as hash hierarchy';
 is %res<type>:exists, True, 'nested keys are accessible as hash hierarchy';
+
+done-testing;
