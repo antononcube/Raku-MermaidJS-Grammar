@@ -12,13 +12,15 @@ role MermaidJS::Actions::Raku::MindMappish {
             my $key = %entry<key> // '';
             next unless $key.chars;
 
-            while @stack.elems > 1 && $indent <= @stack[*-1]<indent> {
+            while @stack.elems > 1 && $indent <= @stack.tail<indent> {
                 @stack.pop;
             }
 
-            my %parent := @stack[*-1]<children>;
+            # Easier than merging hashmaps (functional programming-wise)
+            my %parent := @stack.tail<children>;
             %parent{$key} //= {};
             my %children := %parent{$key};
+
             @stack.push({ indent => $indent, children => %children });
         }
 
