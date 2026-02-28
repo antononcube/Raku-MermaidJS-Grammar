@@ -17,7 +17,7 @@ Languages and formats [Mermaid-JS](https://mermaid.js.org) is translated to:
   - [ ] TODO Vertex styles
   - [ ] TODO Edge styles
 
-A very similar Raku package is ["Graphviz::DOT::Grammar"](https://raku.land/zef:antononcube/Graph), [AAp1].
+A very similar Raku package is ["Graphviz::DOT::Grammar"](https://raku.land/zef:antononcube/Graphviz::DOT::Grammar), [AAp1].
 
 ------
 
@@ -62,6 +62,6 @@ from-mermaid-js --help
 ## References
 
 [AAp1] Anton Antonov,
-[Graphviz::DOT::Grammar. Raku package](https://github.com/antononcube/Raku-Graph),
+[Graphviz::DOT::Grammar. Raku package](https://github.com/antononcube/Raku-Graphviz-DOT-Grammar),
 (2024),
 [GitHub/antononcube](https://github.com/antononcube).
