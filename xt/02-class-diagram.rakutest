@@ -1,0 +1,40 @@
+use v6.d;
+use Test;
+
+use MermaidJS::Grammar;
+
+plan *;
+
+my @samples =
+        q:to/EOF/,
+classDiagram
+    Animal <|-- Duck
+    Animal <|-- Fish
+    Animal <|-- Zebra
+    Animal : +int age
+    Animal : +String gender
+    Animal: +isMammal()
+    Animal: +mate()
+    class Duck{
+        +String beakColor
+        +swim()
+        +quack()
+    }
+    class Fish{
+        -int sizeInFeet
+        -canEat()
+    }
+    class Zebra{
+        +bool is_wild
+        +run()
+    }
+EOF
+;
+
+for @samples.kv -> $i, $src {
+    #say MermaidJS::Grammar.subparse($src);
+    ok MermaidJS::Grammar.parse($src).defined, "sample {$i + 1} parses";
+}
+
+
+done-testing;
