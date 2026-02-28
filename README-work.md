@@ -5,17 +5,19 @@ Raku package with a grammar for Mermaid-JS diagram specs.
 Languages and formats [Mermaid-JS](https://mermaid.js.org) is translated to:
 
 - [X] DONE Raku
-  - Translation to Raku hashmap structure with keys "nodex", "edges", and "styles".
+  - Translation to Raku hashmap structure with keys "nodes", "edges", and "styles".
 - [X] DONE JSON
   - Simple JSON serialization from Raku-actions results.
 - [X] DONE [Graphviz DOT](https://graphviz.org/doc/info/lang.html)
 - [ ] TODO [PlantUML](https://plantuml.com)
-    - PlantUML uses DOT language, so, for flowcharts this _should be_ a very short and easy format implementation based on DOT actions.
-    - The current unfinished implementation tries to reuse the Raku actions. (Without good results.)
+  - PlantUML uses DOT language, so, for flowcharts this _should be_ a very short and easy format implementation based on DOT actions.
+  - The current unfinished implementation tries to reuse the Raku actions. (Without good results.)
 - [ ] TODO Mathematica
-    - [ ] DONE Basic vertexes and edges
-    - [ ] TODO Vertex styles
-    - [ ] TODO Edge styles
+  - [ ] DONE Basic vertexes and edges
+  - [ ] TODO Vertex styles
+  - [ ] TODO Edge styles
+
+A very similar Raku package is ["Graphviz::DOT::Grammar"](https://raku.land/zef:antononcube/Graph), [AAp1].
 
 ------
 
