@@ -5,6 +5,6 @@ use MermaidJS::Actions::Raku;
 class MermaidJS::Actions::Mathematica
         is MermaidJS::Actions::Raku {
     method TOP($/) {
-        die 'Not implemeneted yet.'
+        die 'Not implemented yet.'
     }
 }
