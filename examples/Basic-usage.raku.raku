@@ -4,12 +4,13 @@ use v6.d;
 use MermaidJS::Grammar;
 use JSON::Fast;
 
-my $spec = q:to/EOF/;
+my $flowchart = q:to/EOF/;
 flowchart TD
   A[Start] --> B{Decide}
   B -->|Yes| C[Do thing]
   B -->|No| D[Stop]
 EOF
 
-say to-json(mermaid-js-interpret($spec, actions => 'Raku'));
-#say mermaid-js-interpret($spec, actions => 'PlantUML');
+# .say for |mermaid-js-interpret($spec, actions => 'Raku'));
+# say mermaid-js-interpret($spec, actions => 'PlantUML');
+say mermaid-js-interpret($flowchart, actions => 'DOT');
