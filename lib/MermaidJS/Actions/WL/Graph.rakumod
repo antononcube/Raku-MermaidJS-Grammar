@@ -19,7 +19,7 @@ class MermaidJS::Actions::WL::Graph
             self!wl-rule(self!wl-string($name), "Placed[{self!wl-string($label)}, Center]")
         }));
 
-        my $vshapes = self!wl-assoc($res<nodes>.Array.map({
+        my $vshapes = self!wl-list($res<nodes>.Array.map({
             my $name = $_<name> // '';
             my $shape = self!wl-shape($_<type> // 'rect');
             self!wl-rule(self!wl-string($name), self!wl-string($shape))
