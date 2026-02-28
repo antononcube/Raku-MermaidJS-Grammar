@@ -10,14 +10,23 @@ Languages and formats [Mermaid-JS](https://mermaid.js.org) is translated to:
   - Simple JSON serialization from Raku-actions results.
 - [X] DONE [Graphviz DOT](https://graphviz.org/doc/info/lang.html)
 - [ ] TODO [PlantUML](https://plantuml.com)
-    - PlantUML uses DOT language, so, for flowcharts this _should be_ a very short and easy format implementation based on DOT actions.
-    - The current unfinished implementation tries to reuse the Raku actions. (Without good results.)
-- [ ] TODO Mathematica
-    - [ ] DONE Basic vertexes and edges
-    - [ ] TODO Vertex styles
-    - [ ] TODO Edge styles
+  - PlantUML uses DOT language, so, for flowcharts this _should be_ a very short and easy format implementation based on DOT actions.
+  - The current unfinished implementation tries to reuse the Raku actions. (Without good results.)
+- [ ] TODO Mathematica / Wolfram Language
+  - [X] DONE Basic vertexes and edges
+  - [ ] TODO Vertex styles
+  - [ ] TODO Edge styles
 
-A very similar Raku package is ["Graphviz::DOT::Grammar"](https://raku.land/zef:antononcube/Graphviz::DOT::Grammar), [AAp1]. 
+Currently, Only Mermaid-JS flowcharts are parsed and translated. 
+Here is list of the parser implementation priorities (most important first):
+
+- [X] Flowcharts
+- [ ] Class diagrams
+- [ ] Mind-maps
+- [ ] Sequence diagrams
+- [ ] ERD diagrams
+
+A very similar Raku package is ["Graphviz::DOT::Grammar"](https://raku.land/zef:antononcube/Graphviz::DOT::Grammar), [AAp1].
 
 ------
 
@@ -52,10 +61,10 @@ $spec ==> mermaid-js-interpret
 
 Translate to [Graphviz DOT](https://graphviz.org):
 
-```perl6, output.prompt=NONE,  output.language=mathematica
+```perl6, output.prompt=NONE,  output.language=dot
 $spec ==> mermaid-js-interpret(a=>'DOT')
 ```
-```mathematica
+```dot
 digraph G {
   "A" [label="Start", shape=box];
   "B" [label="Decide", shape=box];
@@ -65,6 +74,15 @@ digraph G {
   "B" -> "C" [label="Yes"];
   "B" -> "D" [label="No"];
 }
+```
+
+Translate to Mathematica / Wolfram Language [`Graph`](https://reference.wolfram.com/language/ref/Graph.html):
+
+```perl6, output.prompt=NONE,  output.language=mathematica
+$spec ==> mermaid-js-interpret(a=>'Mathematica')
+```
+```mathematica
+Graph[{DirectedEdge["A", "B"], DirectedEdge["B", "C"], DirectedEdge["B", "D"]}, VertexLabels -> {"A" -> Placed["Start", Center], "B" -> Placed["Decide", Center], "C" -> Placed["Do thing", Center], "D" -> Placed["Stop", Center]}, VertexShapeFunction -> {"A" -> "Rectangle", "B" -> "Rectangle", "C" -> "Rectangle", "D" -> "Rectangle"}, EdgeLabels -> {DirectedEdge["B", "C"] -> "Yes", DirectedEdge["B", "D"] -> "No"}, VertexSize -> {"Scaled", 0.1}]
 ```
 
 ------
