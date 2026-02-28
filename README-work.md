@@ -6,9 +6,12 @@ Languages and formats [Mermaid-JS](https://mermaid.js.org) is translated to:
 
 - [X] DONE Raku
   - Translation to Raku hashmap structure with keys "nodex", "edges", and "styles".
-- [ ] TODO Graphviz DOT
-- [ ] TODO PlantUML
-    - PlantUML uses DOT language, so it _should be_ a very short and easy format implementation based on DOT actions. 
+- [X] DONE JSON
+  - Simple JSON serialization from Raku-actions results.
+- [X] DONE [Graphviz DOT](https://graphviz.org/doc/info/lang.html)
+- [ ] TODO [PlantUML](https://plantuml.com)
+    - PlantUML uses DOT language, so, for flowcharts this _should be_ a very short and easy format implementation based on DOT actions.
+    - The current unfinished implementation tries to reuse the Raku actions. (Without good results.)
 - [ ] TODO Mathematica
     - [ ] DONE Basic vertexes and edges
     - [ ] TODO Vertex styles
@@ -20,7 +23,7 @@ Languages and formats [Mermaid-JS](https://mermaid.js.org) is translated to:
 
 Here is a Mermaid-JS spec:
 
-```raku
+```raku, output.prompt=NONE,  output.language=mermaid
 my $spec = q:to/END/;
 flowchart TD
   A[Start] --> B{Decide}
@@ -36,10 +39,10 @@ use MermaidJS::Grammar;
 $spec ==> mermaid-js-interpret
 ```
 
-Translate to Mathematica:
+Translate to [Graphviz DOT](https://graphviz.org):
 
 ```perl6, output.prompt=NONE,  output.language=mathematica
-$spec ==> mermaid-js-interpret(a=>'Mathematica')
+$spec ==> mermaid-js-interpret(a=>'DOT')
 ```
 
 ------
