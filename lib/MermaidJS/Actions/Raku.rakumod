@@ -16,7 +16,6 @@ class MermaidJS::Actions::Raku {
 
     method flowchart($/) {
         my @statements = |$<statement-list>.made;
-        say (:@statements);
         my @nodes;
         for @!node-order -> $id {
             my %node = %!nodes{$id};

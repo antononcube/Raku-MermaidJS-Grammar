@@ -1,5 +1,8 @@
 use v6.d;
 use MermaidJS::Grammarish;
+use MermaidJS::Actions::JSON;
+use MermaidJS::Actions::GraphvizDOT;
+use MermaidJS::Actions::Mathematica;
 use MermaidJS::Actions::PlantUML;
 use MermaidJS::Actions::Raku;
 
@@ -27,12 +30,15 @@ our sub mermaid-js-interpret(Str:D $command,
         when Whatever {
             MermaidJS::Actions::Raku.new
         }
-#        when $_ ~~ Str:D && $_.lc ∈ ["mathematica", "wl", "wolfram language"] {
-#            MermaidJS::Actions::Mathematica.new
-#        }
-#        when $_ ~~ Str:D && $_.lc ∈ <dot graphviz graphviz-dot> {
-#            MermaidJS::Actions::GraphvizDOT.new
-#        }
+        when $_ ~~ Str:D && $_.lc ∈ ["mathematica", "wl", "wolfram language"] {
+            MermaidJS::Actions::Mathematica.new
+        }
+        when $_ ~~ Str:D && $_.lc ∈ <dot graphviz graphviz-dot> {
+            MermaidJS::Actions::GraphvizDOT.new
+        }
+        when $_ ~~ Str:D && $_.lc ∈ <json> {
+            MermaidJS::Actions::JSON.new
+        }
         when $_ ~~ Str:D && $_.lc ∈ <plantuml> {
             MermaidJS::Actions::PlantUML.new
         }

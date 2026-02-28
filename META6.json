@@ -7,12 +7,17 @@
     "Anton Antonov"
   ],
   "auth": "zef:antononcube",
-  "depends": [],
+  "depends": [
+    "JSON::Fast"
+  ],
   "build-depends": [],
   "test-depends": [],
   "provides": {
     "MermaidJS::Grammar": "lib/MermaidJS/Grammar.rakumod",
     "MermaidJS::Grammarish": "lib/MermaidJS/Grammarish.rakumod",
+    "MermaidJS::Actions::JSON": "lib/MermaidJS/Actions/JSON.rakumod",
+    "MermaidJS::Actions::GraphvizDOT": "lib/MermaidJS/Actions/GraphvizDOT.rakumod",
+    "MermaidJS::Actions::Mathematica": "lib/MermaidJS/Actions/Mathematica.rakumod",
     "MermaidJS::Actions::PlantUML": "lib/MermaidJS/Actions/PlantUML.rakumod",
     "MermaidJS::Actions::Raku": "lib/MermaidJS/Actions/Raku.rakumod"
   },
@@ -20,6 +25,8 @@
   "license": "Artistic-2.0",
   "tags": [
     "grammar",
+    "graphviz dot",
+    "dot",
     "mathematica",
     "mermaid",
     "mermaid-js",
