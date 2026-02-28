@@ -1,6 +1,10 @@
 Changes of the Raku package "MermaidJS::Grammar".
 
+2026-02-28 0.0.2
+    - Translation to Mathematica (Wolfram Language) actions
+
 2026-02-27 0.0.1
     - First version:
-        - A grammar that parsers flowchart- and class specs
+        - A grammar that parsers flowchart specs
         - Translation to Raku actions
+        - Translation to Graphviz DOT actions
