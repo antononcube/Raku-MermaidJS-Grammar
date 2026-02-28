@@ -20,11 +20,11 @@ Languages and formats [Mermaid-JS](https://mermaid.js.org) is translated to:
 Currently, Only Mermaid-JS flowcharts are parsed and translated. 
 Here is list of the parser implementation priorities (most important first):
 
-- [X] Flowcharts
-- [ ] Class diagrams
-- [ ] Mind-maps
-- [ ] Sequence diagrams
-- [ ] ERD diagrams
+- [X] DONE Flowcharts
+- [ ] TODO Class diagrams
+- [ ] TODO Mind-maps
+- [ ] TODO Sequence diagrams
+- [ ] TODO ERD diagrams
 
 A very similar Raku package is ["Graphviz::DOT::Grammar"](https://raku.land/zef:antononcube/Graphviz::DOT::Grammar), [AAp1].
 
