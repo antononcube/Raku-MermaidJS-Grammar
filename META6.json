@@ -1,40 +1,38 @@
 {
-  "name": "MermaidJS::Grammar",
-  "description": "Grammar for parsing Mermaid-JS language specs and converting them to specs of Graphviz DOT, JSON, PlantUML, Raku, or Wolfram Language.",
-  "version": "0.0.2",
-  "perl": "6.d",
-  "authors": [
-    "Anton Antonov"
-  ],
-  "auth": "zef:antononcube",
-  "depends": [
-    "JSON::Fast"
-  ],
-  "build-depends": [],
-  "test-depends": [],
-  "provides": {
-    "MermaidJS::Grammar": "lib/MermaidJS/Grammar.rakumod",
-    "MermaidJS::Grammarish": "lib/MermaidJS/Grammarish.rakumod",
-    "MermaidJS::Actions::JSON": "lib/MermaidJS/Actions/JSON.rakumod",
-    "MermaidJS::Actions::GraphvizDOT": "lib/MermaidJS/Actions/GraphvizDOT.rakumod",
-    "MermaidJS::Actions::WL::Association": "lib/MermaidJS/Actions/WL/Association.rakumod",
-    "MermaidJS::Actions::PlantUML": "lib/MermaidJS/Actions/PlantUML.rakumod",
-    "MermaidJS::Actions::Raku": "lib/MermaidJS/Actions/Raku.rakumod"
-  },
-  "resources": [],
-  "license": "Artistic-2.0",
-  "tags": [
-    "grammar",
-    "graphviz dot",
-    "dot",
-    "mathematica",
-    "mermaid",
-    "mermaid-js",
-    "parser",
-    "wl",
-    "wolfram language",
-    "wolfram"
-  ],
-  "api": "1",
-  "source-url": "https://github.com/antononcube/Raku-MermaidJS-Grammar.git"
+    "name": "MermaidJS::Grammar",
+    "description": "Grammar for parsing Mermaid-JS language specs and converting them to specs of Graphviz DOT, JSON, PlantUML, Raku, or Wolfram Language.",
+    "version": "0.0.2",
+    "authors": [
+        "Anton Antonov"
+    ],
+    "auth": "zef:antononcube",
+    "depends": [
+        "JSON::Fast"
+    ],
+    "build-depends": [],
+    "provides": {
+        "MermaidJS::Grammar": "lib/MermaidJS/Grammar.rakumod",
+        "MermaidJS::Grammarish": "lib/MermaidJS/Grammarish.rakumod",
+        "MermaidJS::Actions::JSON": "lib/MermaidJS/Actions/JSON.rakumod",
+        "MermaidJS::Actions::GraphvizDOT": "lib/MermaidJS/Actions/GraphvizDOT.rakumod",
+        "MermaidJS::Actions::WL::Association": "lib/MermaidJS/Actions/WL/Association.rakumod",
+        "MermaidJS::Actions::WL::Graph": "lib/MermaidJS/Actions/WL/Graph.rakumod",
+        "MermaidJS::Actions::PlantUML": "lib/MermaidJS/Actions/PlantUML.rakumod",
+        "MermaidJS::Actions::Raku": "lib/MermaidJS/Actions/Raku.rakumod"
+    },
+    "license": "Artistic-2.0",
+    "tags": [
+        "grammar",
+        "graphviz dot",
+        "dot",
+        "mathematica",
+        "mermaid",
+        "mermaid-js",
+        "parser",
+        "wl",
+        "wolfram language",
+        "wolfram"
+    ],
+    "api": "1",
+    "source-url": "https://github.com/antononcube/Raku-MermaidJS-Grammar.git"
 }
