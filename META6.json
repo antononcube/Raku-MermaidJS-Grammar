@@ -35,6 +35,6 @@
     "wolfram language",
     "wolfram"
   ],
-  "api": "0",
+  "api": "1",
   "source-url": "https://github.com/antononcube/Raku-MermaidJS-Grammar.git"
 }
