@@ -1,0 +1,40 @@
+#!/usr/bin/env raku
+use v6.d;
+
+use MermaidJS::Grammar;
+
+my %*SUB-MAIN-OPTS = :named-anywhere;
+
+#-----------------------------------------------------------
+
+#| Converts Mermaid JS language texts or files into Graphviz DOT, Mathematica, PlantUML, or Raku files.
+sub MAIN(Str $text is copy,          #= Input file or Mermaid-JS spec.
+         Str :t(:$to) = 'Whatever',  #= Format to convert to. (One of 'json', 'mathematica', 'dot', 'raku', or 'Whatever'.)
+         Str :o(:$output) = '',      #= Output file; if an empty string then the result is printed to stdout.
+         ) {
+
+    $text = slurp($text) if $text.IO.f;
+
+    my $toSpec = $to;
+    if !$to || $to.lc ∈ <whatever automatic> {
+        $toSpec = do given $output {
+            when !$_.chars { 'json' }
+            when $_ ~~ / '.wl' | '.m' / { 'mathematica' }
+            when $_ ~~ / '.dot' | '.gv' / { 'dot' }
+            when $_ ~~ / '.json' / { 'json' }
+            when $_ ~~ / '.raku' | '.rakumod' | '.p6' | '.pm6' / { 'raku' }
+            default {
+                note 'Cannot automatically determine the format to convert to.';
+                'mermaid'
+            }
+        }
+    }
+
+    my $res = mermaid-js-interpret($text, actions => $toSpec);
+
+    if $output.chars > 0 {
+        spurt($output, $res);
+    } else {
+        say $res;
+    }
+}
