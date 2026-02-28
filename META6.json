@@ -1,7 +1,7 @@
 {
   "name": "MermaidJS::Grammar",
-  "description": "Grammar for parsing Mermaid-JS language specs and converting them to specs of Graphviz DOT, PlantUML, or Wolfram Language.",
-  "version": "0.0.1",
+  "description": "Grammar for parsing Mermaid-JS language specs and converting them to specs of Graphviz DOT, JSON, PlantUML, Raku, or Wolfram Language.",
+  "version": "0.0.2",
   "perl": "6.d",
   "authors": [
     "Anton Antonov"
@@ -17,7 +17,7 @@
     "MermaidJS::Grammarish": "lib/MermaidJS/Grammarish.rakumod",
     "MermaidJS::Actions::JSON": "lib/MermaidJS/Actions/JSON.rakumod",
     "MermaidJS::Actions::GraphvizDOT": "lib/MermaidJS/Actions/GraphvizDOT.rakumod",
-    "MermaidJS::Actions::Mathematica": "lib/MermaidJS/Actions/Mathematica.rakumod",
+    "MermaidJS::Actions::WL::Association": "lib/MermaidJS/Actions/WL/Association.rakumod",
     "MermaidJS::Actions::PlantUML": "lib/MermaidJS/Actions/PlantUML.rakumod",
     "MermaidJS::Actions::Raku": "lib/MermaidJS/Actions/Raku.rakumod"
   },
