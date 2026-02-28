@@ -29,19 +29,11 @@ flowchart TD
 END
 ```
 
-
 Translate to Raku:
 
 ```raku
 use MermaidJS::Grammar;
 $spec ==> mermaid-js-interpret
-```
-```
-# {
-#  edges => [{from => A, label => (Any), to => B, type => -->} {from => B, label => Yes, to => C, type => -->} {from => B, label => No, to => D, type => -->}], 
-#  nodes => [{label => Start, name => A, type => rect} {label => Decide, name => B, type => rhombus} {label => Do thing, name => C, type => rect} {label => Stop, name => D, type => rect}], 
-#  styles => []
-# }
 ```
 
 Translate to Mathematica:
@@ -58,14 +50,6 @@ The package provides the Command Line Interface (CLI) script `from-mermaid-js`. 
 
 ```shell
 from-mermaid-js --help
-```
-```
-# Usage:
-#   from-mermaid-js.raku <text> [-t|--to=<Str>] [-o|--output=<Str>] -- Converts Mermaid JS language texts or files into Graphviz DOT, Mathematica, PlantUML, or Raku files.
-#   
-#     <text>               Input file or Mermaid-JS spec.
-#     -t|--to=<Str>        Format to convert to. (One of 'json', 'mathematica', 'dot', 'raku', or 'Whatever'.) [default: 'Whatever']
-#     -o|--output=<Str>    Output file; if an empty string then the result is printed to stdout. [default: '']
 ```
 
 ------
