@@ -1,0 +1,60 @@
+use v6.d;
+use Test;
+
+use MermaidJS::Grammar;
+
+plan *;
+
+my @samples =
+        q:to/EOF/,
+mindmap
+  root((mindmap))
+EOF
+
+        q:to/EOF/,
+mindmap
+  root((Raku))
+    Parsing
+      Regexes
+      Grammars
+    Ecosystem
+      zef
+EOF
+
+        q:to/EOF/,
+mindmap
+  %% Indented comments are valid
+  root[Mermaid]
+    "Mind map"
+    'Text node'
+    Topic ::icon(fa fa-book)
+    Priority :::important
+EOF
+
+        q:to/EOF/,
+mindmap
+    root((Joke))
+        "Characters"
+            "Priest"
+            "Rabbit"
+            "Minister"
+        "Setting"
+            "Bar"
+        "Action"
+            "Walkintobar"
+            "Bartender asks rabbit"
+                "What to drink"
+            "Rabbit's response"
+                "No idea"
+                "Autocorrect"
+EOF
+;
+
+for @samples.kv -> $i, $src {
+    say '-' xx 100;
+    say MermaidJS::Grammar.subparse($src);
+    ok MermaidJS::Grammar.parse($src).defined, "sample {$i + 1} parses";
+}
+
+
+done-testing;

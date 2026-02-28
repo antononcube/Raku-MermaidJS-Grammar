@@ -19,7 +19,10 @@
         "MermaidJS::Actions::WL::Graph": "lib/MermaidJS/Actions/WL/Graph.rakumod",
         "MermaidJS::Actions::PlantUML": "lib/MermaidJS/Actions/PlantUML.rakumod",
         "MermaidJS::Actions::Raku": "lib/MermaidJS/Actions/Raku.rakumod",
-        "MermaidJS::Grammar::Flowchartish": "lib/MermaidJS/Grammar/Flowchartish.rakumod"
+        "MermaidJS::Actions::Raku::Flowchartish": "lib/MermaidJS/Actions/Raku/Flowchartish.rakumod",
+        "MermaidJS::Actions::Raku::MindMappish": "lib/MermaidJS/Actions/Raku/MindMappish.rakumod",
+        "MermaidJS::Grammar::Flowchartish": "lib/MermaidJS/Grammar/Flowchartish.rakumod",
+        "MermaidJS::Grammar::MindMappish": "lib/MermaidJS/Grammar/MindMappish.rakumod"
     },
     "license": "Artistic-2.0",
     "tags": [
