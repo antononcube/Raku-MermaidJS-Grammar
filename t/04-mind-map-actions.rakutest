@@ -1,0 +1,38 @@
+use v6.d;
+use Test;
+
+use MermaidJS::Grammar;
+
+plan 2;
+
+my $src = q:to/EOF/;
+mindmap
+  root((Raku))
+    Parsing
+      Regexes
+      Grammars
+    Ecosystem
+      zef
+EOF
+
+my %res = mermaid-js-interpret($src, :actions('raku'));
+note %res;
+is-deeply
+        %res,
+        {  type => 'mindmap',
+           root => { Raku => {
+               Parsing => {
+                   Regexes => {},
+                   Grammars => {},
+               },
+               Ecosystem => {
+                   zef => {},
+               },
+           },
+           }
+        },
+        'mindmap interpretation is a nested hash based on indentation'
+        ;
+
+is %res<root><Raku><Parsing><Regexes>:exists, True, 'nested keys are accessible as hash hierarchy';
+is %res<type>:exists, True, 'nested keys are accessible as hash hierarchy';
